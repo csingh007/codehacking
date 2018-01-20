@@ -2,6 +2,16 @@
 
 
 @section('content')
+
+    @if(Session::has('deleted_user'))
+        <p class="alert bg-danger">{{session('deleted_user')}}</p>
+
+    @endif
+
+    @if(Session::has('msg'))
+        <p class="alert bg-info">{{session('msg')}}</p>
+
+    @endif
     <h1>Users</h1>
 
     <table class="table">
@@ -24,8 +34,8 @@
         <td>{{$user->email}}</td>
           <td>{{$user->is_active == 1 ? 'Active' : 'Not Active'}}</td>
           <td>{{$user->role ? $user->role->name : 'User has no role'}}</td>
-          <td>{{$user->created_at}}</td>
-          <td>{{$user->updated_at}}</td>
+          <td>{{$user->created_at->diffForhumans()}}</td>
+          <td>{{$user->updated_at->diffForhumans()}}</td>
       </tr>
           @endforeach
 
